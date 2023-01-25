@@ -46,7 +46,7 @@ const HotCollections = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {loading ? (
+          {!loading ? (
             <OwlCarousel {...options}>
               {nfts.map((nfts, index) => (
                 <div className="nft_coll" key={index}>
@@ -79,11 +79,34 @@ const HotCollections = () => {
               ))}
             </OwlCarousel>
           ) : (
-            new Array(1).fill(0).map((_, index) => (
-              <OwlCarousel {...options} key={index}>
-                <Skeleton />
-              </OwlCarousel>
-            ))
+            <OwlCarousel {...options}>
+              {new Array(1).fill(0).map((_, index) => (
+                <div className="nft_coll" key={index}>
+                  <div className="nft_wrap">
+                    <Link to="">
+                      <Skeleton width="100%" height="200px" />
+                    </Link>
+                  </div>
+                  <div className="nft_coll_pp">
+                    <Link to="">
+                      <Skeleton width="50px" height="50px" borderRadius="50%" />
+                    </Link>
+                    <i className="fa fa-check"></i>
+                  </div>
+                  <div className="nft_coll_info">
+                    <Link to="">
+                      <Skeleton
+                        width="100px"
+                        height="20px"
+                        borderRadius="2px"
+                      />
+                    </Link>
+                    <br />
+                    <Skeleton width="60px" height="20px" borderRadius="2px" />
+                  </div>
+                </div>
+              ))}
+            </OwlCarousel>
           )}
         </div>
       </div>
