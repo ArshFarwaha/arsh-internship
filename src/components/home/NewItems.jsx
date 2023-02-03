@@ -5,8 +5,9 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import axios from "axios";
 import Skeleton from "../UI/Skeleton";
+import Countdown from "../UI/Countdown";
 
-const NewItems = () => {
+const NewItems = ({ expiryDate }) => {
   const [nfts, setNFTs] = useState([]);
   const [owl, setOwl] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -30,13 +31,13 @@ const NewItems = () => {
         "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems/"
       );
       setNFTs(data);
-      setOwl(true);
       setLoading(false);
+      setOwl(true);
     }
     fetchNFTs();
   }, []);
 
-  return (
+    return (
     <section id="section-items" className="no-bottom">
       <div className="container">
         <div className="row">
@@ -46,7 +47,7 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {loading ? (
+          {!loading ? (
             <OwlCarousel {...options}>
               {nfts.map((nfts, index) => (
                 <div className="nft__item" key={index}>
@@ -61,7 +62,7 @@ const NewItems = () => {
                       <i className="fa fa-check"></i>
                     </Link>
                   </div>
-                  <div className="de_countdown">{nfts.expiryDate}</div>
+                  <Countdown expiryDate={nfts.expiryDate} />
                   <div className="nft__item_wrap">
                     <div className="nft__item_extra">
                       <div className="nft__item_buttons">
