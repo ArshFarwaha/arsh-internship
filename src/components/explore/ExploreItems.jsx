@@ -7,22 +7,38 @@ import Skeleton from "../UI/Skeleton";
 const ExploreItems = () => {
   const [nfts, setNFTs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [displayItems, setDisplayItems] = useState(8);
+
+  const fetchNFTs = async () => {
+    setLoading(true);
+    const { data } = await axios.get(
+      "https://us-central1-nft-cloud-functions.cloudfunctions.net/explore"
+    );
+    setNFTs(data);
+    setLoading(false);
+  };
+
+  const filterItems = async (value) => {
+    setLoading(true);
+    const { data } = await axios.get(
+      `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${value}`
+    );
+    setNFTs(data);
+    setLoading(false);
+  };
 
   useEffect(() => {
-    async function fetchNFTs() {
-      const { data } = await axios.get(
-        "https://us-central1-nft-cloud-functions.cloudfunctions.net/explore"
-      );
-      setNFTs(data);
-      setLoading(false);
-    }
     fetchNFTs();
   }, []);
 
   return (
     <>
       <div>
-        <select id="filter-items" defaultValue="">
+        <select
+          id="filter-items"
+          defaultValue=""
+          onChange={(e) => filterItems(e.target.value)}
+        >
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
           <option value="price_high_to_low">Price, High to Low</option>
@@ -30,7 +46,7 @@ const ExploreItems = () => {
         </select>
       </div>
       {!loading
-        ? nfts.map((nfts, index) => (
+        ? nfts.slice(0, displayItems).map((nfts, index) => (
             <div
               key={index}
               className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
@@ -48,7 +64,6 @@ const ExploreItems = () => {
                   </Link>
                 </div>
                 <Countdown expiryDate={nfts.expiryDate} />
-
                 <div className="nft__item_wrap">
                   <div className="nft__item_extra">
                     <div className="nft__item_buttons">
@@ -101,7 +116,6 @@ const ExploreItems = () => {
                     <i className="fa fa-check"></i>
                   </Link>
                 </div>
-
                 <div className="nft__item_wrap">
                   <div className="nft__item_extra">
                     <div className="nft__item_buttons">
@@ -137,9 +151,13 @@ const ExploreItems = () => {
               </div>
             </div>
           ))}
-
       <div className="col-md-12 text-center">
-        <Link to="" id="loadmore" className="btn-main lead">
+        <Link
+          to=""
+          id="loadmore"
+          className="btn-main lead"
+          onClick={() => setDisplayItems(displayItems + 4)}
+        >
           Load more
         </Link>
       </div>
