@@ -37,7 +37,7 @@ const NewItems = ({ expiryDate }) => {
     fetchNFTs();
   }, []);
 
-    return (
+  return (
     <section id="section-items" className="no-bottom">
       <div className="container">
         <div className="row">
@@ -53,7 +53,7 @@ const NewItems = ({ expiryDate }) => {
                 <div className="nft__item" key={index}>
                   <div className="author_list_pp">
                     <Link
-                      to="/author"
+                      to={`/author/${nfts.authorId}`}
                       data-bs-toggle="tooltip"
                       data-bs-placement="top"
                       title="Creator: Monica Lucas"
@@ -90,7 +90,7 @@ const NewItems = ({ expiryDate }) => {
                     </Link>
                   </div>
                   <div className="nft__item_info">
-                    <Link to="/item-details">
+                    <Link to={`/item-details/${nfts.nftId}`}>
                       <h4>{nfts.title}</h4>
                     </Link>
                     <div className="nft__item_price">{nfts.price} ETH</div>
