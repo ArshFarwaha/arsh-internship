@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NFT from "../../images/nft.png";
 import backgroundImage from "../../images/bg-shape-1.jpg";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Landing = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
     <section
+      data-aos="zoom-in"
       id="section-hero"
       aria-label="section"
       className="no-top no-bottom vh-100"

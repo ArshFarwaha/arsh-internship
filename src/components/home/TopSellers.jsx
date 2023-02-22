@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Skeleton from "../UI/Skeleton";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const TopSellers = () => {
   const [nfts, setNFTs] = useState([]);
@@ -18,8 +20,12 @@ const TopSellers = () => {
     fetchNFTs();
   }, []);
 
+  useEffect(() => {
+    AOS.init();
+  });
+
   return (
-    <section id="section-popular" className="pb-5">
+    <section data-aos="fade-down" id="section-popular" className="pb-5">
       <div className="container">
         <div className="row">
           <div className="col-lg-12">
