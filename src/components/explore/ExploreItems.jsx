@@ -103,7 +103,7 @@ const ExploreItems = () => {
               </div>
             </div>
           ))
-        : nfts.map((nfts, index) => (
+        : new Array(8).fill(0).map((nfts, index) => (
             <div
               key={index}
               className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"

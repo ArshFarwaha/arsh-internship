@@ -8,16 +8,13 @@ import Skeleton from "../components/UI/Skeleton";
 const Author = () => {
   const [author, setAuthor] = useState();
   const { authorId } = useParams();
-  const [loading, setLoading] = useState(true);
   const [follow, setFollow] = useState(false);
 
   const fetchAuthor = async () => {
-    setLoading(true);
     const { data } = await axios.get(
       `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`
     );
     setAuthor(data);
-    setLoading(false);
   };
 
   function handleFollow() {
@@ -40,8 +37,6 @@ const Author = () => {
     fetchAuthor();
   }, []);
 
-  console.log(author)
-
   return (
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
@@ -53,7 +48,7 @@ const Author = () => {
           data-bgimage="url(images/author_banner.jpg) top"
           style={{ background: `url(${AuthorBanner}) top` }}
         ></section>
-        {!loading ? (
+        {author ? (
           <section aria-label="section">
             <div className="container">
               <div className="row">

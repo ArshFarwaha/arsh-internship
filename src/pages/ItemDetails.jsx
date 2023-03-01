@@ -6,8 +6,7 @@ import Skeleton from "../components/UI/Skeleton";
 
 const ItemDetails = () => {
   const { nftId } = useParams();
-  const [nft, setNft] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [nft, setNft] = useState();
 
   useEffect(() => {
     async function fetchNft() {
@@ -17,7 +16,6 @@ const ItemDetails = () => {
       setNft(data);
     }
     fetchNft();
-    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -31,7 +29,7 @@ const ItemDetails = () => {
         <section aria-label="section" className="mt90 sm-mt-0">
           <div className="container">
             <div className="row">
-              {!loading ? (
+              {nft ? (
                 <>
                   <div className="col-md-6 text-center">
                     <img
