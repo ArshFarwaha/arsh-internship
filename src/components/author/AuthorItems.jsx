@@ -8,9 +8,9 @@ const AuthorItems = ({ author }) => {
       <div className="tab-1">
         <div className="row">
           {author
-            ? author.nftCollection.map((author) => (
+            ? author.nftCollection.map((nft) => (
                 <div
-                  key={author.id}
+                  key={nft.id}
                   className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
                 >
                   <div className="nft__item">
@@ -40,29 +40,29 @@ const AuthorItems = ({ author }) => {
                       </div>
                       <Link to={`/item-details/${author.nftId}`}>
                         <img
-                          src={author.nftImage}
+                          src={nft.nftImage}
                           className="lazy nft__item_preview"
                           alt=""
                         />
                       </Link>
                     </div>
                     <div className="nft__item_info">
-                      <Link to={`/item-details/${author.nftId}`}>
-                        <h4>{author.title}</h4>
+                      <Link to={`/item-details/${nft.nftId}`}>
+                        <h4>{nft.title}</h4>
                       </Link>
-                      <div className="nft__item_price">{author.price} ETH</div>
+                      <div className="nft__item_price">{nft.price} ETH</div>
                       <div className="nft__item_like">
                         <i className="fa fa-heart"></i>
-                        <span>{author.likes}</span>
+                        <span>{nft.likes}</span>
                       </div>
                     </div>
                   </div>
                 </div>
               ))
-            : new Array(8).fill(0).map((author) => (
+            : new Array(8).fill(0).map((nft) => (
                 <div
                   className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
-                  key={author.id}
+                  key={nft.id}
                 >
                   <div className="nft__item">
                     <div className="author_list_pp">
@@ -93,12 +93,12 @@ const AuthorItems = ({ author }) => {
                           </div>
                         </div>
                       </div>
-                      <Link to={`/item-details/${author.nftId}`}>
+                      <Link to={`/item-details/${nft.nftId}`}>
                         <Skeleton width="100%" height="200px" />
                       </Link>
                     </div>
                     <div className="nft__item_info">
-                      <Link to={`/item-details/${author.nftId}`}>
+                      <Link to={`/item-details/${nft.nftId}`}>
                         <Skeleton
                           width="100px"
                           height="20px"
